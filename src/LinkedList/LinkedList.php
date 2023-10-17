@@ -2,15 +2,18 @@
 
 namespace PDS\LinkedList;
 
+use PDS\Comparator;
 use PDS\Node\Node;
 
 class LinkedList {
-	private $head = null;
-	private $tail = null;
-	public function __construct()
+	private $head;
+	private $tail;
+	private $compare;
+	public function __construct($compareFunction = null)
 	{
 		$this->head = null;
 		$this->tail = null;
+		$this->compare = new Comparator($compareFunction);
 	}
 
 	/**
@@ -129,6 +132,24 @@ class LinkedList {
 		return $this->head;
 	}
 
+	public function getHeadOrNull(): ?Node 
+	{
+		if($this->isNonHead()){
+			return null;
+		}
+
+		return $this->getHead();
+	}
+
+	public function getTailOrNull(): ?Node 
+	{
+		if($this->isNonTail()){
+			return null;
+		}
+
+		return $this->getTail();
+	}
+
 	/**
 	 * get tail node
 	 *
@@ -137,6 +158,31 @@ class LinkedList {
 	public function getTail(): ?Node
 	{
 		return $this->tail;
+	}
+
+	/**
+	 * Undocumented function
+	 *
+	 * @param callable|mixed $value
+	 * 
+	 * @return Node|null
+	 */
+	public function find($value): ?Node
+	{
+		$node = $this->getHeadOrNull();
+
+		while($node instanceof Node){	
+			if(is_callable($value) && $value($node)){
+				return $node;
+			}
+			if(!is_callable($value) && isset($value) && $this->compare->equal($value,$node->getValue())){
+				break;
+			}
+			$node = $node->getNextNode();
+		}
+
+		return $node;
+
 	}
 }
 

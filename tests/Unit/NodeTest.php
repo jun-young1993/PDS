@@ -1,6 +1,6 @@
 <?php
 
-namespace PDS\Node\Node;
+
 
 use PDS\Node\Node;
 use PHPUnit\Framework;

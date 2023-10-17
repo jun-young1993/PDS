@@ -94,3 +94,10 @@ $linkedList->getHead()->getNextNode()->getNextNode()->getValue();// 3
 
 
 ```
+### LinkedList
+---
+```shell
+$ composer test tests/Unit/HashTable
+```
+```php
+```

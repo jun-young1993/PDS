@@ -23,6 +23,17 @@ class Node {
 	}
 
 	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $value
+	 * @return void
+	 */
+	public function setValue($value): void
+	{
+		$this->value = $value;
+	}
+
+	/**
 	 * set next node
 	 *
 	 * @return Node

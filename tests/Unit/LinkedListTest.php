@@ -112,5 +112,67 @@ final class LinkedListTest extends Framework\TestCase
 		self::assertSame($number3,$linkedList->getHead()->getNextNode()->getNextNode()->getValue());
 
 	}
+
+
+	public function testGetHeadOrNull(): void
+	{
+		$linkedList = new LinkedList();
+		
+		self::assertNull($linkedList->getHeadOrNull());
+
+		$number3 = 3;
+		$linkedList->prepend($number3);
+		self::assertInstanceOf(Node::class,$linkedList->getHeadOrNull());
+	}
+
+	public function testGetTailOrNull(): void
+	{
+		$linkedList = new LinkedList();
+		
+		self::assertNull($linkedList->getTailOrNull());
+
+		$number3 = 3;
+		$linkedList->prepend($number3);
+		self::assertInstanceOf(Node::class,$linkedList->getTailOrNull());
+	}
+
+	public function testFindNode(): void
+	{
+		$linkedList = new LinkedList();
+		$linkedList->append(1);
+		$linkedList->append(2);
+		$linkedList->append(3);
+		$linkedList->append(100);
+		$linkedList->append(1000);
+		self::assertSame(1000,$linkedList->find(1000)->getValue());
+		self::assertSame(100,$linkedList->find(100)->getValue());
+		self::assertNull($linkedList->find(200));
+		
+
+	}
+
+	
+	public function testFindCallbackNode(): void
+	{
+		$linkedList = new LinkedList();
+		$findValue1 = 1000;
+		$linkedList->append(1);
+		$linkedList->append(2);
+		$linkedList->append(3);
+		$linkedList->append(100);
+		$linkedList->append($findValue1);
+		
+		self::assertSame(1000,$linkedList->find(function($value) use ($findValue1){
+			return $value->getValue() === $findValue1;
+		})->getValue());
+		self::assertSame(100,$linkedList->find(function($value){
+			return $value->getValue() === 100;
+		})->getValue());
+		self::assertNull($linkedList->find(function($value) {
+			return $value->getValue() === 200;
+		}));
+		
+
+	}
 	
 }
