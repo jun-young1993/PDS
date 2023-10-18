@@ -94,10 +94,31 @@ $linkedList->getHead()->getNextNode()->getNextNode()->getValue();// 3
 
 
 ```
-### LinkedList
+### Hash Table
 ---
 ```shell
 $ composer test tests/Unit/HashTable
 ```
 ```php
+	// create hash table
+	// default 32 length
+	$hashTable1 = new HashTable(); 
+	$hashTable1->getBucketLength(); // 32
+
+	$hashTable2 = new HashTable(64); 
+	$hashTable2->getBucketLength(); // 64
+
+	$key = 'foo';
+	$value = 'bar';
+	$hashTable1->set($key,$value); 
+	$hashTable1->get($key); // bar
+
+	$hashTable3 = new HashTable(3);
+	$hashTable3->set('a','a'); // hash index 1
+	$hashTable3->set('d','d'); // hash index 1
+
+	$hashTable3->get('a'); // 'a'
+	$hashTable3->get('d'); // 'd'
+
+	
 ```

@@ -42,12 +42,23 @@ final class HashTableTest extends Framework\TestCase
 	public function testGetOrSetValue(): void
 	{
 		$hashTable = new HashTable();
-		$key = 'a';
+		$key = 'foo';
+		$testValue = 'bar';
 
 		self::assertNull($hashTable->get($key));
-		$testValue = 'test';
+		
 		$hashTable->set($key,$testValue);
 		self::assertSame($testValue, $hashTable->get($key));
+	}
+
+	public function testCollision(): void
+	{
+		$hashTable = new HashTable(3);
+		$hashTable->set('a','a');
+		self::assertSame('a',$hashTable->get('a'));
+		$hashTable->set('d','d');
+		self::assertSame('a',$hashTable->get('a'));
+		self::assertSame('d',$hashTable->get('d'));
 	}
 	
 }
