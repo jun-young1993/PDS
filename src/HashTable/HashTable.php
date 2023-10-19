@@ -147,5 +147,10 @@ class HashTable {
 	}
 
 	
+	public function has(string $key)
+	{
+		return $this->keys[$key] === null ? false : true;
+	}
+	
 	
 }

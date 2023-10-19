@@ -60,5 +60,14 @@ final class HashTableTest extends Framework\TestCase
 		self::assertSame('a',$hashTable->get('a'));
 		self::assertSame('d',$hashTable->get('d'));
 	}
+
+	public function testHas(): void
+	{
+		$hashTable = new HashTable(3);
+		$key = 'a';
+		self::assertFalse($hashTable->has($key));
+		$hashTable->set($key,'test');
+		self::assertTrue($hashTable->has($key));
+	}
 	
 }
